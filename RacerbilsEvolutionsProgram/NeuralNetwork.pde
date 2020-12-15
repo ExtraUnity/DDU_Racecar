@@ -24,22 +24,23 @@ class NeuralNetwork {
 
   float getOutput(float x1, float x2, float x3) {
     //layer1
-    if(x1 == 1 && x2 == 1){
-      return 0.2;
-    } else if(x1 == 1) {
-      return 0.2;
-    } else if(x3 == 1 && x2 == 1) {
-      return -0.2;
-    } else if(x3 == 1) {
-      return -0.1;
-    } else if(x1 == 1 && x2 == 1 && x3 == 1) {
-      return 0.2;
-    } else {
-      return 0;
-    }
-    //float o11 = weights[0]*x1+ weights[1]*x2 + weights[2]*x3 + biases[0];
-    //float o12 = weights[3]*x1+ weights[4]*x2 + weights[5]*x3 + biases[1];
-    ////layer2
-    //return o11*weights[6] + o12*weights[7] + biases[2];
+    //if(x1 == 1 && x2 == 1){
+    //  return 0.2;
+    //} else if(x1 == 1) {
+    //  return 0.2;
+    //} else if(x3 == 1 && x2 == 1) {
+    //  return -0.2;
+    //} else if(x3 == 1) {
+    //  return -0.1;
+    //} else if(x1 == 1 && x2 == 1 && x3 == 1) {
+    //  return 0.2;
+    //} else {
+    //  return 0;
+    //}
+     //layer1
+    float o11 = weights[0]*x1+ weights[1]*x2 + weights[2]*x3 + biases[0];
+    float o12 = weights[3]*x1+ weights[4]*x2 + weights[5]*x3 + biases[1];
+    //layer2
+    return o11*weights[6] + o12*weights[7] + biases[2];
   }
 }

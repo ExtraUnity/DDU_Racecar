@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Collections;
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
 int       populationSize  = 100;     
 
@@ -14,13 +16,19 @@ void setup() {
 }
 
 void draw() {
-  println(carSystem.CarControllerList.get(0).sensorSystem.lapTimeInFrames);
+  //println(carSystem.CarControllerList.get(0).sensorSystem.lapTimeInFrames);
   clear();
   fill(255);
   rect(0,50,1000,1000);
   image(trackImage,0,80);  
 
   carSystem.updateAndDisplay();
+  
+  
+  if(frameCount%300==0){
+  carSystem.newGen();
+  println("here");
+  }
   
   //TESTKODE: Frastortering af dårlige biler, for hver gang der går 200 frame - f.eks. dem der kører uden for banen
   /* if (frameCount%200==0) {

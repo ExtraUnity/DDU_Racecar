@@ -1,10 +1,11 @@
-class CarController {
+class CarController implements Comparable <CarController>{
   //Forbinder - Sensorer & Hjerne & Bil
   float varians             = 2; //hvor stor er variansen på de tilfældige vægte og bias
   Car bil                    = new Car();
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
-      
+  float _fitness = -1;
+
   void update() {
     //1.)opdtarer bil 
     bil.update();
@@ -19,9 +20,37 @@ class CarController {
     //4.)bilen drejes
     bil.turnCar(turnAngle);
   }
-  
-  void display(){
+
+  void display() {
     bil.displayCar();
     sensorSystem.displaySensors();
   }
+
+  float fitness() {
+    //TODO: implement this.
+    if (sensorSystem.lapTimeInFrames != 10000) {
+      // has completed the track 
+      return 1000.0/sensorSystem.lapTimeInFrames + frameCount - sensorSystem.clockWiseRotationFrameCounter;
+    } else{
+      return sensorSystem.firstTrackExit- sensorSystem.clockWiseRotationFrameCounter;
+    }
+  }
+
+  // DP variant
+  float getFitness() {
+    if (_fitness == -1) {
+      float temp = fitness();
+      _fitness = temp; 
+      return temp;
+    } else {
+      return _fitness;
+    }
+  }
+  
+  
+  int compareTo(CarController other){
+    return round(10*(this.getFitness() - other.getFitness()));
+  
+  }
+  
 }
