@@ -23,16 +23,16 @@ class CarController implements Comparable <CarController>{
 
   void display() {
     bil.displayCar();
-    sensorSystem.displaySensors();
+    //sensorSystem.displaySensors();
   }
 
   float fitness() {
     //TODO: implement this.
     if (sensorSystem.lapTimeInFrames != 10000) {
       // has completed the track 
-      return 1000.0/sensorSystem.lapTimeInFrames + frameCount - sensorSystem.clockWiseRotationFrameCounter;
+      return 1000.0/sensorSystem.lapTimeInFrames + frameCount;
     } else{
-      return sensorSystem.firstTrackExit- sensorSystem.clockWiseRotationFrameCounter;
+      return sensorSystem.firstTrackExit == 0?frameCount: sensorSystem.firstTrackExit;
     }
   }
 
@@ -49,7 +49,7 @@ class CarController implements Comparable <CarController>{
   
   
   int compareTo(CarController other){
-    return round(10*(this.getFitness() - other.getFitness()));
+    return round((this.getFitness() - other.getFitness()));
   
   }
   

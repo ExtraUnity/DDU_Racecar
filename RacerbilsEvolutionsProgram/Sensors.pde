@@ -28,7 +28,7 @@ class SensorSystem {
   int     lastTimeInFrames      = 0;
   int     lapTimeInFrames       = 10000;
   
-  int firstTrackExit = -1; 
+  int firstTrackExit = 0; 
 
   void displaySensors() {
     strokeWeight(0.5);
