@@ -3,7 +3,7 @@ class CarSystem {
   //Her kan man lave en generisk alogoritme, der skaber en optimal "hjerne" til de forhåndenværende betingelser
 
   ArrayList<CarController> CarControllerList  = new ArrayList<CarController>();
-  float mutationIntensity  = 0.1;
+  float mutationIntensity  = 0.01;
 
   CarSystem(int populationSize) {
     for (int i=0; i<populationSize; i++) { 
@@ -16,8 +16,9 @@ class CarSystem {
     //1.) Opdaterer sensorer og bilpositioner
     for (CarController controller : CarControllerList) {
 
+      controller.update();
       if (controller.sensorSystem.whiteSensorFrameCount ==0) {
-        controller.update();
+        
       }
     }
 
@@ -33,9 +34,14 @@ class CarSystem {
 
   CarController[] selectCars() {
     Collections.sort(CarControllerList);
+    //CarControllerList.get(CarControllerList.size() -1).bil.displayCar(color(#00ff00));
+    //println(CarControllerList.get(CarControllerList.size() -1).bil.toString());
+    //CarControllerList.get(0).bil.displayCar(color(#ff0000));
+    //for(CarController q : CarControllerList){
+    //  println(q.getFitness());
+    //}
     
-    
-    CarController[] temp = new CarController[5];
+    CarController[] temp = new CarController[1]; // the top n best cars are selected.
 
     for (int i = CarControllerList.size() -1; i>CarControllerList.size()-1 -temp.length ; i--) {
       //print(CarControllerList.get(i).getFitness() +", ");
@@ -48,7 +54,7 @@ class CarSystem {
     ArrayList<CarController> temp  = new ArrayList<CarController>();
 
     for (int i = 0; i < input.length; i++) {
-      for (int j = 0; j<(int)populationSize/5; j++) {
+      for (int j = 0; j<(int)populationSize/input.length; j++) {
         temp.add(mutation(input[i]));
         
       }
@@ -61,11 +67,11 @@ class CarSystem {
     CarController temp = new CarController();
 
     for (int i = 0; i<car.hjerne.weights.length; i++ ) {
-      temp.hjerne.weights[i] = car.hjerne.weights[i] * random(1-mutationIntensity, 1+mutationIntensity) * (random(1)>0.01?1:-1);
+      temp.hjerne.weights[i] = car.hjerne.weights[i] * random(1-mutationIntensity, 1+mutationIntensity);//* (random(1)>0.01?1:-1);
     }
 
     for (int i = 0; i<car.hjerne.biases.length; i++ ) {
-      temp.hjerne.biases[i] = car.hjerne.biases[i] * random(1-mutationIntensity, 1+mutationIntensity) * (random(1)>0.01?1:-1);
+      temp.hjerne.biases[i] = car.hjerne.biases[i] * random(1-mutationIntensity, 1+mutationIntensity); // * (random(1)>0.01?1:-1);
     }
 
     return temp; 

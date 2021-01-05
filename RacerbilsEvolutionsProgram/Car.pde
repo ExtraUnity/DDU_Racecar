@@ -13,8 +13,21 @@ class Car {
     ellipse(pos.x, pos.y, 10, 10);
   }
   
+  void displayCar(color col) {
+    stroke(100);
+    fill(col);
+    ellipse(pos.x, pos.y, 10, 10);
+  }
+  
+  
+  
   void update() {
     pos.add(vel);
   }
+  
+  String toString(){
+  return "pos: " + pos + ", vel: " +  vel;
+  }
+  
   
 }

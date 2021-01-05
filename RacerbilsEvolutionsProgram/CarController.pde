@@ -27,13 +27,15 @@ class CarController implements Comparable <CarController>{
   }
 
   float fitness() {
-    //TODO: implement this.
-    if (sensorSystem.lapTimeInFrames != 10000) {
-      // has completed the track 
-      return 1000.0/sensorSystem.lapTimeInFrames + frameCount;
-    } else{
-      return sensorSystem.firstTrackExit == 0?frameCount: sensorSystem.firstTrackExit;
-    }
+    // high fitness is good.
+    return -9* sensorSystem.whiteSensorFrameCount +3* sensorSystem.clockWiseRotationFrameCounter;
+    
+    //if (sensorSystem.lapTimeInFrames != 10000) {
+    //  // has completed the track 
+    //  fit += pow(sensorSystem.lapTimeInFrames, -1)*1000000;
+    //} 
+      //fit -= sensorSystem.whiteSensorFrameCount + sensorSystem.clockWiseRotationFrameCounter; // sensorSystem.firstTrackExit == 0?frameCount: sensorSystem.firstTrackExit;
+   
   }
 
   // DP variant
