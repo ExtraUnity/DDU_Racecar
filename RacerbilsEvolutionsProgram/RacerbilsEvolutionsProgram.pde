@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Collections;
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 500;     
+int       populationSize  = 1000;     
 
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
@@ -26,7 +26,7 @@ void draw() {
 
   carSystem.updateAndDisplay();
 
-  if (frameCount == 300) {
+  if (frameCount == 1000) {
     //carSystem.selectCars();
     //noLoop();
     carSystem.newGen();

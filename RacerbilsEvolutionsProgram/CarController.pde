@@ -25,10 +25,14 @@ class CarController implements Comparable <CarController>{
     bil.displayCar();
     //sensorSystem.displaySensors();
   }
+  void display(color c) {
+    bil.displayCar(c);
+    //sensorSystem.displaySensors();
+  }
 
   float fitness() {
     // high fitness is good.
-    return -9* sensorSystem.whiteSensorFrameCount +3* sensorSystem.clockWiseRotationFrameCounter;
+    return -sensorSystem.clockWiseRotationFrameCounter;
     
     //if (sensorSystem.lapTimeInFrames != 10000) {
     //  // has completed the track 
@@ -40,13 +44,7 @@ class CarController implements Comparable <CarController>{
 
   // DP variant
   float getFitness() {
-    if (_fitness == -1) {
-      float temp = fitness();
-      _fitness = temp; 
-      return temp;
-    } else {
-      return _fitness;
-    }
+    return fitness();
   }
   
   
