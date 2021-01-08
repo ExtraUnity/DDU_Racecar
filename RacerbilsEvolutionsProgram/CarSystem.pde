@@ -44,7 +44,6 @@ class CarSystem {
     CarController[] temp = new CarController[1]; // the top n best cars are selected.
 
     for (int i = CarControllerList.size() -1; i>CarControllerList.size()-1 -temp.length ; i--) {
-      //print(CarControllerList.get(i).getFitness() +", ");
       temp[CarControllerList.size() -1 - i] = CarControllerList.get(i);
     }
     return temp;
@@ -62,8 +61,7 @@ class CarSystem {
     return temp;
   }
 
-  CarController mutation(CarController car) {
-    
+  CarController mutation(CarController car) { // it is impossible for the sign to change, but that prevents radical changes to the weights and biases
     CarController temp = new CarController();
 
     for (int i = 0; i<car.hjerne.weights.length; i++ ) {

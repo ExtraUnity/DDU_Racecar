@@ -19,14 +19,12 @@ class Car {
     ellipse(pos.x, pos.y, 10, 10);
   }
   
-  
-  
   void update() {
     pos.add(vel);
   }
   
   String toString(){
-  return "pos: " + pos + ", vel: " +  vel;
+    return "pos: " + pos + ", vel: " +  vel;
   }
   
   
