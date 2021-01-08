@@ -29,17 +29,26 @@ class CarController implements Comparable <CarController>{
   float fitness() {
     // high fitness is good.
     return -9* sensorSystem.whiteSensorFrameCount +3* sensorSystem.clockWiseRotationFrameCounter;
+    
+    //if (sensorSystem.lapTimeInFrames != 10000) {
+    //  // has completed the track 
+    //  fit += pow(sensorSystem.lapTimeInFrames, -1)*1000000;
+    //} 
+      //fit -= sensorSystem.whiteSensorFrameCount + sensorSystem.clockWiseRotationFrameCounter; // sensorSystem.firstTrackExit == 0?frameCount: sensorSystem.firstTrackExit;
+   
   }
 
-  // Uses dynamic programming
+  // DP variant
   float getFitness() {
     if (_fitness == -1) {
-      _fitness = fitness(); 
-      return _fitness;
+      float temp = fitness();
+      _fitness = temp; 
+      return temp;
     } else {
       return _fitness;
     }
   }
+  
   
   int compareTo(CarController other){
     return round((this.getFitness() - other.getFitness()));
