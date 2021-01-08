@@ -42,7 +42,6 @@ class CarController implements Comparable <CarController>{
     return fitness();
   }
   
-  
   int compareTo(CarController other){
     return round((this.getFitness() - other.getFitness()));
   
