@@ -9,7 +9,7 @@ class Car {
 
   void displayCar() {
     stroke(100);
-    fill(100);
+    fill(100, 40);
     ellipse(pos.x, pos.y, 10, 10);
   }
   
@@ -18,8 +18,6 @@ class Car {
     fill(col);
     ellipse(pos.x, pos.y, 10, 10);
   }
-  
-  
   
   void update() {
     pos.add(vel);
