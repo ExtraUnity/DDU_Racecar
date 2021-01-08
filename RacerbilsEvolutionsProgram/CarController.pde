@@ -5,6 +5,13 @@ class CarController implements Comparable <CarController>{
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
   float _fitness = -1;
+  
+  CarController(){}
+  
+  
+  CarController(NeuralNetwork nn){
+    this.hjerne = nn;
+  }
 
   void update() {
     //1.)opdtarer bil 
@@ -35,18 +42,21 @@ class CarController implements Comparable <CarController>{
     //  fit += pow(sensorSystem.lapTimeInFrames, -1)*1000000;
     //} 
       //fit -= sensorSystem.whiteSensorFrameCount + sensorSystem.clockWiseRotationFrameCounter; // sensorSystem.firstTrackExit == 0?frameCount: sensorSystem.firstTrackExit;
-   
   }
 
   // DP variant
+  //float getFitness() {
+  //  if (_fitness == -1) {
+  //    float temp = fitness();
+  //    _fitness = temp; 
+  //    return temp;
+  //  } else {
+  //    return _fitness;
+  //  }
+  //}
+  
   float getFitness() {
-    if (_fitness == -1) {
-      float temp = fitness();
-      _fitness = temp; 
-      return temp;
-    } else {
-      return _fitness;
-    }
+    return fitness();
   }
   
   

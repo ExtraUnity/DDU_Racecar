@@ -41,7 +41,7 @@ class CarSystem {
     //  println(q.getFitness());
     //}
     
-    CarController[] temp = new CarController[1]; // the top n best cars are selected.
+    CarController[] temp = new CarController[10]; // the top n best cars are selected.
 
     for (int i = CarControllerList.size() -1; i>CarControllerList.size()-1 -temp.length ; i--) {
       //print(CarControllerList.get(i).getFitness() +", ");
@@ -52,6 +52,11 @@ class CarSystem {
 
   ArrayList<CarController> nextGen (CarController[] input) {
     ArrayList<CarController> temp  = new ArrayList<CarController>();
+
+    for(CarController cc : input){
+      temp.add(new CarController(cc.hjerne));
+    }
+
 
     for (int i = 0; i < input.length; i++) {
       for (int j = 0; j<(int)populationSize/input.length; j++) {
