@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 1000;     
+int       populationSize  = 1;     
 
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);

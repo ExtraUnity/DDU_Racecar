@@ -37,7 +37,7 @@ class CarSystem {
     Collections.sort(CarControllerList);
 
     
-    CarController[] temp = new CarController[10]; // the top n best cars are selected.
+    CarController[] temp = new CarController[1]; // the top n best cars are selected.
 
     for (int i = CarControllerList.size() -1; i>CarControllerList.size()-1 -temp.length ; i--) {
       temp[CarControllerList.size() -1 - i] = CarControllerList.get(i);
