@@ -5,7 +5,8 @@ class CarController implements Comparable <CarController>{
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
   float _fitness = -1;
-
+  
+  
   void update() {
     //1.)opdtarer bil 
     bil.update();
@@ -27,12 +28,16 @@ class CarController implements Comparable <CarController>{
   }
   void display(color c) {
     bil.displayCar(c);
+    println(sensorSystem.timesCrossed);
     //sensorSystem.displaySensors();
   }
 
   float fitness() {
     // high fitness is good.
-    return -sensorSystem.clockWiseRotationFrameCounter;
+    if(sensorSystem.clockWiseRotationFrameCounter<0 && (sensorSystem.timesCrossed+1)<0) {
+      return sensorSystem.clockWiseRotationFrameCounter*(sensorSystem.timesCrossed+1);
+    }
+      return (-sensorSystem.clockWiseRotationFrameCounter)*(sensorSystem.timesCrossed+1);
     
     //if (sensorSystem.lapTimeInFrames != 10000) {
     //  // has completed the track 
