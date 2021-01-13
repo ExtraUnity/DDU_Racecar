@@ -4,7 +4,6 @@ class CarController implements Comparable <CarController>{
   Car bil                    = new Car();
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
-  float _fitness = -1;
   
   CarController(){}
   
@@ -35,7 +34,6 @@ class CarController implements Comparable <CarController>{
   float fitness() {
     // high fitness is good.
     return -9* sensorSystem.whiteSensorFrameCount +3* sensorSystem.clockWiseRotationFrameCounter;
-   
   }
   
   float getFitness() {
