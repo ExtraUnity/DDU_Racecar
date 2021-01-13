@@ -31,11 +31,19 @@ class CarController implements Comparable <CarController>{
     bil.displayCar();
     //sensorSystem.displaySensors();
   }
+  void display(color c) {
+    bil.displayCar(c);
+    println(sensorSystem.timesCrossed);
+    //sensorSystem.displaySensors();
+  }
 
   float fitness() {
     // high fitness is good.
-    return -9* sensorSystem.whiteSensorFrameCount +3* sensorSystem.clockWiseRotationFrameCounter;
-   
+
+    if(sensorSystem.clockWiseRotationFrameCounter<0 && (sensorSystem.timesCrossed+1)<0) {
+      return sensorSystem.clockWiseRotationFrameCounter*(sensorSystem.timesCrossed+1);
+    }
+      return (-sensorSystem.clockWiseRotationFrameCounter)*(sensorSystem.timesCrossed+1);
   }
   
   float getFitness() {

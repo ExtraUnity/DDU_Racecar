@@ -25,11 +25,11 @@ class SensorSystem {
 
   //lapTime calculation
   boolean lastGreenDetection;
+  boolean lastRedDetection;
   int     lastTimeInFrames      = 0;
   int     lapTimeInFrames       = 10000;
+  int timesCrossed = 0;
   
-  int firstTrackExit = 0; 
-
   void displaySensors() {
     strokeWeight(0.5);
     if (frontSensorSignal) { 
@@ -66,23 +66,36 @@ class SensorSystem {
     color color_car_position = get(int(pos.x), int(pos.y));
     if (color_car_position ==-1) {
       whiteSensorFrameCount = whiteSensorFrameCount+1;
-      firstTrackExit = frameCount;
     }
     //Laptime calculation
     boolean currentGreenDetection =false;
     if (red(color_car_position)==0 && blue(color_car_position)==0 && green(color_car_position)!=0) {//den grønne målstreg er detekteret
       currentGreenDetection = true;
     }
+    boolean currentRedDetection = false;
+    if(red(color_car_position)!=0 && blue(color_car_position)==0 && green(color_car_position)==0) {
+      currentRedDetection = true;
+    }
+    
+    //check which way the car passed the finish line
+    if(lastRedDetection && currentGreenDetection) {
+      timesCrossed--;
+    } else if(currentRedDetection && lastGreenDetection) {
+      timesCrossed++;
+    }
+    
     if (lastGreenDetection && !currentGreenDetection) {  //sidst grønt & nu ikke => vi har passeret målstregen 
       lapTimeInFrames = frameCount - lastTimeInFrames; //LAPTIME BEREGNES - frames nu - frames sidst
       lastTimeInFrames = frameCount;
     }   
     lastGreenDetection = currentGreenDetection; //Husker om der var grønt sidst
+    lastRedDetection = currentRedDetection;
     //count clockWiseRotationFrameCounter
     centerToCarVector.set((height/2)-pos.x, (width/2)-pos.y);    
     float currentRotationAngle =  centerToCarVector.heading();
     float deltaHeading   =  lastRotationAngle - centerToCarVector.heading();
     clockWiseRotationFrameCounter  =  deltaHeading>0 ? clockWiseRotationFrameCounter + 1 : clockWiseRotationFrameCounter -1; 
+
     lastRotationAngle = currentRotationAngle;
     
     updateSensorVectors(vel);

@@ -26,7 +26,9 @@ void draw(){
 
   carSystem.updateAndDisplay();
 
-  if (frameCount == 1500) {
+  if (frameCount == 1000) {
+    //carSystem.selectCars();
+    //noLoop();
     carSystem.newGen();
     frameCount = 0;
   }
