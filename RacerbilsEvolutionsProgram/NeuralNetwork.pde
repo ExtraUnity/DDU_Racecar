@@ -45,7 +45,7 @@ class NeuralNetwork {
   
   
   String toString(){
-    return "Wei: " + this.weights + "bia: " +this.biases;
+    return "Wei: " + Arrays.toString(this.weights) + " bia: " + Arrays.toString(this.biases);
   
   }
 }

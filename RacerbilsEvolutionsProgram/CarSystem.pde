@@ -35,17 +35,9 @@ class CarSystem {
 
   CarController[] selectCars() {
     Collections.sort(CarControllerList);
-    //CarControllerList.get(CarControllerList.size() -1).bil.displayCar(color(#00ff00));
-    //println(CarControllerList.get(CarControllerList.size() -1).bil.toString());
-    //CarControllerList.get(0).bil.displayCar(color(#ff0000));
-    //for(CarController q : CarControllerList){
-    //  println(q.getFitness());
-    //}
-
     CarController[] temp = new CarController[1]; // the top n best cars are selected.
 
     for (int i = CarControllerList.size() -1; i>CarControllerList.size()-1 -temp.length; i--) {
-      //print(CarControllerList.get(i).getFitness() +", ");
       temp[CarControllerList.size() -1 - i] = CarControllerList.get(i);
     }
     return temp;
@@ -53,13 +45,14 @@ class CarSystem {
 
   ArrayList<CarController> nextGen (CarController[] input) {
     ArrayList<CarController> temp  = new ArrayList<CarController>();
-    for (int i = 0; i<input.length; i++) {
-      CarController best = new CarController();
-      best.hjerne = input[i].hjerne;
-      temp.add(best);
+
+    for(CarController cc : input){
+      temp.add(new CarController(cc.hjerne));
     }
+
     for (int i = 0; i < input.length; i++) {
-      for (int j = 0; j<(int)populationSize/input.length-input.length; j++) {
+      for (int j = 0; j<(int)populationSize/input.length - input.length; j++) {
+
         temp.add(mutation(input[i]));
       }
     }

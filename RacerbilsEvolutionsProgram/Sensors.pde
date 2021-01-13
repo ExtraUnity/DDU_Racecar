@@ -94,7 +94,8 @@ class SensorSystem {
     centerToCarVector.set((height/2)-pos.x, (width/2)-pos.y);    
     float currentRotationAngle =  centerToCarVector.heading();
     float deltaHeading   =  lastRotationAngle - centerToCarVector.heading();
-    clockWiseRotationFrameCounter  =  deltaHeading<0 ? clockWiseRotationFrameCounter + 1 : clockWiseRotationFrameCounter -1; // changed from original
+    clockWiseRotationFrameCounter  =  deltaHeading>0 ? clockWiseRotationFrameCounter + 1 : clockWiseRotationFrameCounter -1; 
+
     lastRotationAngle = currentRotationAngle;
     
     updateSensorVectors(vel);
