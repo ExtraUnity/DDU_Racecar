@@ -52,7 +52,7 @@ class SensorSystem {
   float disToWall(PVector direction, PVector startPos) {
     PVector normDirection = direction.normalize();
     
-    for (int vectorMag =1; vectorMag <= max(height, width); vectorMag++) {
+    for (int vectorMag =1; vectorMag <= max(height, width); vectorMag++) { // this makes up to 1800 calculations.
       direction = PVector.mult(normDirection, vectorMag);
       //strokeWeight(3);
            
@@ -65,6 +65,7 @@ class SensorSystem {
       }
       
     }
+    
     return 0;
   }
 

@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 10;     
+int       populationSize  = 1000;     
 
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
@@ -12,7 +12,7 @@ PImage    trackImage;
 
 void setup() {
   size(500, 600);
-  frameRate(10);
+  frameRate(200);
   //size(700, 600);
 
   trackImage = loadImage("track.png");
@@ -23,10 +23,10 @@ void draw(){
   fill(255);
   rect(-1000, -1000, 2000, 2000);
   image(trackImage, 0, 80);  
-
+  
   carSystem.updateAndDisplay();
 
-  if (frameCount == 500) {
+  if (frameCount == 300) {
     //carSystem.selectCars();
     //noLoop();
     carSystem.newGen();
