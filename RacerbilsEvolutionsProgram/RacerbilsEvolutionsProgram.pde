@@ -23,10 +23,10 @@ void draw(){
   fill(255);
   rect(-1000, -1000, 2000, 2000);
   image(trackImage, 0, 80);  
-
+  
   carSystem.updateAndDisplay();
 
-  if (frameCount == 1000) {
+  if (frameCount == 300) {
     //carSystem.selectCars();
     //noLoop();
     carSystem.newGen();
@@ -44,4 +44,13 @@ void draw(){
    }
    }*/
   //
+}
+
+float sigmoid (float x){
+  //x = abs(x);
+  //return x;
+  return (exp(x) / (exp(x) +1));
+  
+  //return x / (sqrt(1+x));
+  
 }
