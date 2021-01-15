@@ -17,11 +17,10 @@ class CarController implements Comparable <CarController>{
     //2.)opdaterer sensorer    
     sensorSystem.updateSensorsignals(bil.pos, bil.vel);
     //3.)hjernen beregner hvor meget der skal drejes
-    float turnAngle = 0;
+    float turnAngle;
     float x1 = (sensorSystem.leftSensorSignal);
     float x2 = (sensorSystem.frontSensorSignal);
     float x3 = (sensorSystem.rightSensorSignal);  
-    //println(x1);
     turnAngle = hjerne.getOutput(x1, x2, x3);    
     //4.)bilen drejes
     bil.turnCar(turnAngle);
@@ -31,10 +30,9 @@ class CarController implements Comparable <CarController>{
     bil.displayCar();
     //sensorSystem.displaySensors();
   }
+  
   void display(color c) {
     bil.displayCar(c);
-    //println(sensorSystem.timesCrossed);
-    //sensorSystem.displaySensors();
   }
 
   float fitness() {
@@ -51,7 +49,5 @@ class CarController implements Comparable <CarController>{
   
   int compareTo(CarController other){
     return round((this.getFitness() - other.getFitness()));
-  
   }
-  
 }
