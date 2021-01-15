@@ -23,17 +23,15 @@ class NeuralNetwork {
   }
 
   float getOutput(float x1, float x2, float x3) {
-    
-    x1 = (1/x1);
-    x2 = (1/x2);
-    x3 = (1/x3);
-    
+    x1 = map(x1, 0, height, -6, 6);
+    x2 = map(x2, 0, height, -6, 6);
+    x3 = map(x3, 0, height, -6, 6);
      //layer1
     float o11 = sigmoid(weights[0]*x1+ weights[1]*x2 + weights[2]*x3 + biases[0]);
     float o12 = sigmoid(weights[3]*x1+ weights[4]*x2 + weights[5]*x3 + biases[1]);
     //layer2
 
-    println(o11*weights[6] + o12*weights[7] + biases[2], TAU*sigmoid(o11*weights[6] + o12*weights[7] + biases[2]) - PI);
+    //println(o11*weights[6] + o12*weights[7] + biases[2], TAU*sigmoid(o11*weights[6] + o12*weights[7] + biases[2]) - PI);
     return TAU*sigmoid(o11*weights[6] + o12*weights[7] + biases[2]) - PI;
   }
   
