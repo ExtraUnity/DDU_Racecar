@@ -4,7 +4,7 @@ import java.util.Random;
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
 int populationSize  = 1000;
 int bestAmount = 10;
-int generation = 0;
+int generation = 1;
 
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
@@ -52,11 +52,11 @@ class GraphicalInterface {
 
 
   void render() {
-    String out = "Fame Count: "+frameCount+ "\n" + 
+    String out = "Frame Count: "+frameCount+ "\n" + 
                   "Framerate: " + frameRate +  "\n" + 
                   "Population Size: " + populationSize + "\n" + 
                   "Generation: "+ generation + "\n" + 
-                  "Best fitness: " + Collections.max(carSystem.CarControllerList).fitness();
+                  "Best Fitness: " + Collections.max(carSystem.CarControllerList).fitness();
     text(out, origin.x, origin.y);
   }
   
@@ -65,4 +65,3 @@ class GraphicalInterface {
 float sigmoid (float x){
   return (exp(x) / (exp(x) +1));
 }
-
