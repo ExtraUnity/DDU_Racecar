@@ -2,8 +2,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 1000;
-int       bestAmount = 10;
+int populationSize  = 1000;
+int bestAmount = 10;
 int generation = 0;
 
 //CarSystem: Indholder en population af "controllere" 
@@ -18,7 +18,6 @@ GraphicalInterface gui;
 void setup() {
   size(500, 600);
   frameRate(200);
-  //size(700, 600);
 
   trackImage = loadImage("track.png");
   gui = new GraphicalInterface(new PVector(10, height*0.025));
@@ -29,28 +28,18 @@ void draw() {
   fill(255);
   rect(-1000, -1000, 2000, 2000);
   image(trackImage, 0, 80);  
-
+  
   carSystem.updateAndDisplay();
   fill(0);
   gui.render();
 
-  if (frameCount == 1500) {
+  if (frameCount == 300) {
+    //carSystem.selectCars();
+    //noLoop();
     carSystem.newGen();
     frameCount = 0;
     generation++;
   }
-
-  //TESTKODE: Frastortering af dårlige biler, for hver gang der går 200 frame - f.eks. dem der kører uden for banen
-  /* if (frameCount%200==0) {
-   println("FJERN DEM DER KØRER UDENFOR BANEN frameCount: " + frameCount);
-   for (int i = carSystem.CarControllerList.size()-1 ; i >= 0;  i--) {
-   SensorSystem s = carSystem.CarControllerList.get(i).sensorSystem;
-   if(s.whiteSensorFrameCount > 0){
-   carSystem.CarControllerList.remove(carSystem.CarControllerList.get(i));
-   }
-   }
-   }*/
-  //
 }
 
 
@@ -70,4 +59,10 @@ class GraphicalInterface {
                   "Best fitness: " + Collections.max(carSystem.CarControllerList).fitness();
     text(out, origin.x, origin.y);
   }
+  
 }
+
+float sigmoid (float x){
+  return (exp(x) / (exp(x) +1));
+}
+
