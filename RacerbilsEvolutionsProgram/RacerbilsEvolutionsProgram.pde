@@ -9,7 +9,7 @@ int generation = 1;
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
 
-//trackImage: RacerBanen , Vejen=sort, Udenfor=hvid, Målstreg= 100%grøn 
+//trackImage: RacerBanen , Vejen=sort, Udenfor=hvid, Målstreg= 100%grøn + 100% rød
 PImage    trackImage;
 
 
@@ -34,8 +34,6 @@ void draw() {
   gui.render();
 
   if (frameCount == 300) {
-    //carSystem.selectCars();
-    //noLoop();
     carSystem.newGen();
     frameCount = 0;
     generation++;

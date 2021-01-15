@@ -2,7 +2,7 @@ class SensorSystem {
   //SensorSystem - alle bilens sensorer - ogå dem der ikke bruges af "hjernen"
 
   //wall detectors
-  float sensorMag = 50;
+  float sensorMag = 1;
   float sensorAngle = PI*2/8;
 
   PVector anchorPos           = new PVector();
@@ -20,8 +20,8 @@ class SensorSystem {
 
   //clockwise rotation detection
   PVector centerToCarVector     = new PVector();
-  float   lastRotationAngle   = -1;
-  float   clockWiseRotationFrameCounter  = 0;
+  float   lastRotationAngle     = -1;
+  float   clockWiseRotationFrameCounter = 0;
 
   //lapTime calculation
   boolean lastGreenDetection;
@@ -33,7 +33,7 @@ class SensorSystem {
   
   void displaySensors() {
     strokeWeight(2);
-     fill(250);
+    fill(250);
 
     PVector frontCollisionVector = PVector.mult(sensorVectorFront.normalize(), this.disToWall(sensorVectorFront, anchorPos));
     PVector leftCollisionVector = PVector.mult(sensorVectorLeft.normalize(), this.disToWall(sensorVectorLeft, anchorPos));
@@ -52,29 +52,18 @@ class SensorSystem {
   float disToWall(PVector direction, PVector startPos) {
     PVector normDirection = direction.normalize();
     
-    for (int vectorMag =1; vectorMag <= max(height, width); vectorMag++) { // this makes up to 1800 calculations.
+    for (int vectorMag =1; vectorMag <= max(height, width); vectorMag++) { // this makes up to 3*600 calculations.
       direction = PVector.mult(normDirection, vectorMag);
-      //strokeWeight(3);
-           
+      
       if (get(int(startPos.x+direction.x), int(startPos.y+direction.y))==-1) {
-        //stroke(#00ffff);
-        //line(startPos.x, startPos.y, startPos.x+direction.x,startPos.y+direction.y);
-        //stroke(#0000ff);
-        //point(startPos.x+direction.x,startPos.y+direction.y);
         return direction.mag();
       }
-      
     }
-    
     return 0;
   }
 
   void updateSensorsignals(PVector pos, PVector vel) {
-    //Collision detectors
-    //frontSensorSignal = get(int(pos.x+sensorVectorFront.x), int(pos.y+sensorVectorFront.y))==-1?true:false;
-    //leftSensorSignal = get(int(pos.x+sensorVectorLeft.x), int(pos.y+sensorVectorLeft.y))==-1?true:false;
-    //rightSensorSignal = get(int(pos.x+sensorVectorRight.x), int(pos.y+sensorVectorRight.y))==-1?true:false;  
-    
+    //Wall detectors
     frontSensorSignal   = disToWall(sensorVectorFront, pos);
     leftSensorSignal    = disToWall(sensorVectorLeft, pos);
     rightSensorSignal   = disToWall(sensorVectorRight, pos);
@@ -107,6 +96,7 @@ class SensorSystem {
     }   
     lastGreenDetection = currentGreenDetection; //Husker om der var grønt sidst
     lastRedDetection = currentRedDetection;
+    
     //count clockWiseRotationFrameCounter
     centerToCarVector.set((height/2)-pos.x, (width/2)-pos.y);    
     float currentRotationAngle =  centerToCarVector.heading();

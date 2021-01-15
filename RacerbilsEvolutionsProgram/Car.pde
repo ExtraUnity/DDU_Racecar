@@ -24,8 +24,6 @@ class Car {
   }
   
   String toString(){
-  return "pos: " + pos + ", vel: " +  vel;
+    return "pos: " + pos + ", vel: " +  vel;
   }
-  
-  
 }
